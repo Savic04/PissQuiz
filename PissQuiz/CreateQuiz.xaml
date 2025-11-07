@@ -1,0 +1,68 @@
+﻿<Window x:Class="PissQuiz.CreateQuiz"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Skapa nytt Quiz" Height="700" Width="600" Background="Black">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20" Background="BlueViolet">
+
+            <!-- Titel -->
+            <TextBlock Text="Titel på quiz:" FontWeight="Bold" FontSize="16"/>
+            <TextBox x:Name="TitleTextBox" Margin="0,5,0,20" FontSize="14"/>
+
+            <!-- Frågor -->
+            <ItemsControl x:Name="QuestionPanels">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,20">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Header}" FontWeight="Bold" Margin="0,0,10,5"/>
+                                    <Button Content="🗑 Ta bort" 
+                                            Background="LightCoral" 
+                                            Foreground="White"
+                                            Padding="3,2"
+                                            HorizontalAlignment="Right"
+                                            Click="RemoveQuestion_Click"/>
+                                </StackPanel>
+
+                                <TextBox Text="{Binding QuestionText}" Tag="{Binding}" Margin="0,0,0,10"/>
+
+                                <StackPanel>
+                                    <TextBlock Text="Svarsalternativ:" FontWeight="Bold" Margin="0,0,0,5"/>
+
+                                    <ItemsControl ItemsSource="{Binding Options}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" Margin="0,2">
+                                                    <RadioButton GroupName="{Binding DataContext.Header, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                 IsChecked="{Binding IsCorrect}"
+                                                                 VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                                    <TextBox Text="{Binding Text}" Width="400"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Knapp för att lägga till nya frågor -->
+            <Button Content="+ Lägg till fråga" 
+                    Click="AddQuestion_Click"
+                    Margin="0,0,0,20"
+                    Padding="10"
+                    FontSize="14"
+                    Background="LightBlue"/>
+
+            <Button Content="Spara Quiz" 
+                    Click="SaveQuiz_Click" 
+                    Padding="10" 
+                    FontSize="16" 
+                    Background="LightGreen"/>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

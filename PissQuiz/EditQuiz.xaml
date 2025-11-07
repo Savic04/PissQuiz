@@ -1,0 +1,32 @@
+﻿<Window x:Class="PissQuiz.EditQuiz"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Redigera Quiz" Height="500" Width="700" Background="Black">
+    <Grid Margin="10" Background="HotPink">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Lista med alla quiz -->
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="Välj quiz:" FontWeight="Bold" Margin="0,0,0,5"/>
+            <ListBox x:Name="QuizListBox" Height="350" Background="Aqua" SelectionChanged="QuizListBox_SelectionChanged"/>
+        </StackPanel>
+
+        <!-- Redigeringsdel -->
+        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+            <TextBlock Text="Titel:" FontWeight="Bold"/>
+            <TextBox x:Name="TitleBox" Margin="0,0,0,10" Background="Aqua"/>
+
+            <TextBlock Text="Frågor:" FontWeight="Bold"/>
+            <ListBox x:Name="QuestionsList" Height="300" DisplayMemberPath="Text" Background="Aqua" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Lägg till fråga" Width="100" Margin="0,0,5,0" Click="AddQuestion_Click"/>
+                <Button Content="Ta bort fråga" Width="100" Margin="0,0,5,0" Click="RemoveQuestion_Click"/>
+                <Button Content="Spara quiz" Width="100" Click="SaveQuiz_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
